@@ -81,5 +81,41 @@ function validate4(phoneNumber) {
 
 // option of solution #5
 function validate5(phoneNumber) {
+    if (phoneNumber.length > 8 ||
+        phoneNumber.length < 7) {
+        return false;
+    }
+
+    else if (phoneNumber.length === 8) {
+        if (phoneNumber.charAt(3) !== '-') {
+            return false;
+        }
+
+        let numbers = phoneNumber.split('-');
+
+        if (isNaN(numbers[0]) || numbers[0] === '   ' || isNaN(numbers[1] || numbers[1] === '    ')) {
+            return false;
+        }
+
+    } else {
+        if (phoneNumber.charAt(3) === '-') {
+            return false;
+        }
+
+        let first = phoneNumber.substring(0, 3);
+        let second = phoneNumber.substring(phoneNumber.length - 4);
+
+        if (isNaN(first) || first === '   ' || isNaN(second) || second === '    ') {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+// option of solution #6
+function validate6(phoneNumber) {
     return phoneNumber.match(/^\d{3}-?\d{4}$/);
 }
+
+console.log(validate5('1111111'));
